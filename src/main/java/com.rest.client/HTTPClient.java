@@ -2,6 +2,7 @@ package com.rest.client;
 
 
 import org.apache.http.Header;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -19,12 +20,12 @@ public class HTTPClient {
 
     //1. GET Call
 
-    public void getCall(String url) throws IOException, JSONException {
-       CloseableHttpClient httpClient =  HttpClients.createDefault(); //closeable HHTP connection
+    public CloseableHttpResponse getCall(String url) throws ClientProtocolException, IOException, JSONException {
+        CloseableHttpClient httpClient =  HttpClients.createDefault(); //closeable HHTP connection
         HttpGet getCall = new HttpGet(url); // REST get Call
         CloseableHttpResponse response = httpClient.execute(getCall);
-
-        //A. Extracting the Response code
+        return response;
+       /* //A. Extracting the Response code
         int statusCode = response.getStatusLine().getStatusCode();
         System.out.println("Status code is :" + statusCode);
         // B. Getting Response JSON
@@ -40,6 +41,6 @@ public class HTTPClient {
         }
 
         System.out.println("All Headers are : " + headerAll);
-
+*/
     }
 }
